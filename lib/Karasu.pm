@@ -5,6 +5,7 @@ use Carp ();
 use Class::Load ();
 use DBI 1.33;
 use DBIx::TransactionManager 1.06;
+use Karasu::Iterator;
 use Karasu::QueryBuilder;
 use Class::Accessor::Lite
     rw => [ qw(
@@ -416,7 +417,15 @@ sub single {
 
 sub search_by_sql {
     my ($self, $sql, $bind, $table_name) = @_;
-    return $self->execute($sql, $bind);
+
+    my $sth = $self->execute($sql, $bind);
+    my $itr = Karasu::Iterator->new(
+        karasu     => $self,
+        sth        => $sth,
+        sql        => $sql,
+        table_name => $table_name
+    );
+    return wantarray ? $itr->all : $itr;
 }
 
 sub single_by_sql {
