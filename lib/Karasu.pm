@@ -45,9 +45,9 @@ sub new {
     my $loader = delete $args{loader};
 
     my $self = bless {
-        owner_pid  => $$,
-        no_ping    => 0,
-        field_case => 'NAME_lc',
+        owner_pid   => $$,
+        no_ping     => 0,
+        fields_case => 'NAME_lc',
         %args,
     }, $class;
 
@@ -95,7 +95,7 @@ sub connect {
 sub _on_connect_do {
     my $self = shift;
 
-    if ( my $on_connect_do = $self->_on_connect_do ) {
+    if ( my $on_connect_do = $self->on_connect_do ) {
         if (not ref($on_connect_do)) {
             $self->do($on_connect_do);
         } elsif (ref($on_connect_do) eq 'CODE') {
@@ -178,7 +178,7 @@ sub _verify_pid {
         $self->reconnect;
     }
     elsif ( my $dbh = $self->{dbh} ) {
-        if ( !$dbh->FETCH('ACTIVE') ) {
+        if ( !$dbh->FETCH('Active') ) {
             $self->reconnect;
         }
         elsif ( !$self->no_ping && !$dbh->ping) {
