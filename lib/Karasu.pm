@@ -360,12 +360,21 @@ sub do {
     $ret;
 }
 
+sub _get_select_columns {
+    my ($self, $opt) = @_;
+
+    return $opt->{'+columns'}
+        ? ['*', @{$opt->{'+columns'}}]
+        : ($opt->{columns} || ['*'])
+    ;
+}
+
 sub search {
     my ($self, $table_name, $where, $opt) = @_;
 
     my ($sql, @binds) = $self->{sql_builder}->select(
         $table_name,
-        $opt->{columns} ? $opt->{columns} : '*',
+        $self->_get_select_columns($opt),
         $where,
         $opt
     );
@@ -405,7 +414,7 @@ sub single {
 
     my ($sql, @binds) = $self->{sql_builder}->select(
         $table_name,
-        $opt->{columns} ? $opt->{columns} : ['*'],
+        $self->_get_select_columns($opt),
         $where,
         $opt
     );
