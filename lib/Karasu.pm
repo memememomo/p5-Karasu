@@ -405,7 +405,7 @@ sub single {
 
     my ($sql, @binds) = $self->{sql_builder}->select(
         $table_name,
-        $opt->{columns} ? @{$opt->{columns}} : '*',
+        $opt->{columns} ? $opt->{columns} : ['*'],
         $where,
         $opt
     );

@@ -12,14 +12,14 @@ CREATE TABLE mock_basic (
   name text,
   delete_fg int(1) default 0,
   primary key ( id )
-});
+)});
     $dbh->do(q{
 CREATE TABLE mock_basic_camelcase (
   Id   integer,
   Name text,
   DeleteFg int(1) default 0,
   primary key ( Id )
-});
+)});
 }
 
 sub create_mysql {
