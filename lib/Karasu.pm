@@ -452,6 +452,15 @@ sub single_named {
     $self->single_by_sql($self->_bind_named($sql, $args), $table_name);
 }
 
+sub _guess_table_name {
+    my ($class, $sql) = @_;
+
+    if ($sql =~ /\sfrom\s+["`]?([\w]+)["`]?\s*/si) {
+        return $1;
+    }
+    return;
+}
+
 sub handle_error {
     my ($self, $stmt, $bind, $reason) = @_;
     require Data::Dumper;
