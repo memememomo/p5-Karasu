@@ -27,7 +27,7 @@ sub prepare_db {
 
 sub setup_dbh {
     shift;
-    my $file = shift || ':memomy:';
+    my $file = shift || ':memory:';
     DBI->connect('dbi:SQLite:'.$file,'','',{RaiseError => 1, PrintError => 0, AutoCommit => 1});
 }
 
