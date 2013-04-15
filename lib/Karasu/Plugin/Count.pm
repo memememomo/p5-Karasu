@@ -3,6 +3,8 @@ use strict;
 use warnings;
 use utf8;
 
+our @EXPORT = qw/count/;
+
 sub count {
     my ($self, $table, $column, $where, $opt) = @_;
 

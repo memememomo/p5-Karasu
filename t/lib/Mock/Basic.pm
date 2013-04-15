@@ -4,6 +4,7 @@ use base qw(KarasuTest);
 
 __PACKAGE__->load_plugin('Count');
 
+
 sub create_sqlite {
     my ($class, $dbh) = @_;
     $dbh->do(q{
