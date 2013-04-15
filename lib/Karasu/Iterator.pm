@@ -35,7 +35,7 @@ sub all {
 
     if ($self->{sth}) {
         $self->{select_columns} ||= $self->{sth}->{$self->{karasu}->{fields_case}};
-        $result = $self->{sth}->fetchall_array(+{});
+        $result = $self->{sth}->fetchall_arrayref(+{});
         $self->{sth}->finish;
         $self->{sth} = undef;
     }
