@@ -113,7 +113,7 @@ subtest 'search with non-exist table' => sub {
         my $itr = $db->search('must_not_exist', {}, { order_by => 'name' });
     };
     ok $@;
-    like $@, qr/No such table/i;
+    like $@, qr/(No such table)|(doesn't exist)/i;
 };
 
 done_testing;
