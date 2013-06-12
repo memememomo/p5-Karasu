@@ -4,7 +4,7 @@ all_from 'lib/Karasu.pm';
 
 requires 'parent';
 requires 'Carp';
-requires 'Class::Accesor::Lite' => 0.05;
+requires 'Class::Accessor::Lite' => 0.05;
 requires 'Class::Load' => 0.06;
 requires 'Data::Page';
 requires 'DBI' => '1.33';
